@@ -47,8 +47,10 @@ func SlashDMY(s rules.Strategy) rules.Rule {
 				return false, nil
 			}
 
-			day, _ := strconv.Atoi(m.Captures[0])
-			month, _ := strconv.Atoi(m.Captures[1])
+			//day, _ := strconv.Atoi(m.Captures[0])
+			//month, _ := strconv.Atoi(m.Captures[1])
+			month, _ := strconv.Atoi(m.Captures[0])
+			day, _ := strconv.Atoi(m.Captures[1])
 			year := -1
 			if m.Captures[2] != "" {
 				year, _ = strconv.Atoi(m.Captures[2])
@@ -74,13 +76,12 @@ func SlashDMY(s rules.Strategy) rules.Rule {
 				year = ref.Year() + 1
 				goto WithYear
 			}
-
 			if int(ref.Month()) == month {
 				if getDays(ref.Year(), month) >= day {
 					if day > ref.Day() {
 						year = ref.Year()
 					} else if day < ref.Day() {
-						year = ref.Year() + 1
+						year = ref.Year()
 					} else {
 						return false, nil
 					}
